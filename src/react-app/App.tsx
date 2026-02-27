@@ -1,157 +1,180 @@
 import { useState } from "react";
 
 function App() {
-	const [status, setStatus] = useState("Отключено");
-	const [hover, setHover] = useState(false);
-
-	const isActive = status !== "Отключено";
+	const [active, setActive] = useState(false);
 
 	return (
-		<div
-			style={{
-				minHeight: "100vh",
-				background: "linear-gradient(135deg, #1e3c72, #2a5298)",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				padding: "20px",
-				fontFamily: "Segoe UI, sans-serif",
-			}}
-		>
-			<div
-				style={{
-					width: "100%",
-					maxWidth: "900px",
-					backgroundColor: "#ffffff",
-					borderRadius: "16px",
-					boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-					padding: "40px",
-					textAlign: "center",
-				}}
-			>
-				<header style={{ marginBottom: "40px" }}>
-					<h1
-						style={{
-							fontSize: "36px",
-							margin: 0,
-							background: "linear-gradient(90deg, #1e3c72, #2a5298)",
-							WebkitBackgroundClip: "text",
-							WebkitTextFillColor: "transparent",
-						}}
-					>
-						CloudHub Solutions
-					</h1>
-					<p style={{ color: "#666", marginTop: "10px" }}>
-						Будущее ваших данных в надежных руках
-					</p>
-				</header>
-
-				{/* Карточка 1 */}
-				<section style={cardStyle}>
-					<h2>Что такое Облако?</h2>
-					<p style={{ lineHeight: "1.6", color: "#555" }}>
-						Облачные вычисления — это предоставление серверов, хранилищ,
-						баз данных и программного обеспечения через Интернет.
-						Это быстро, безопасно и масштабируемо.
-					</p>
-				</section>
-
-				{/* Карточка 2 */}
-				<section style={cardStyle}>
-					<h2>Наши преимущества</h2>
-					<ul style={listStyle}>
-						<li>✔ Высокая доступность 99.99%</li>
-						<li>✔ Мгновенная масштабируемость</li>
-						<li>✔ Enterprise-уровень безопасности</li>
-						<li>✔ Экономия на инфраструктуре</li>
-					</ul>
-				</section>
-
-				{/* Изображение */}
-				<div style={{ margin: "30px 0" }}>
-					<img
-						src="https://miro.medium.com/v2/resize:fit:1400/1*9MZL1F7Lz7aJg6YVdE8H1A.png"
-						alt="Cloud Architecture"
-						style={{
-							width: "100%",
-							borderRadius: "12px",
-							boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-						}}
-					/>
-				</div>
-
-				{/* Статус */}
-				<section style={cardStyle}>
-					<h2>Статус сервера</h2>
-
-					<p
-						style={{
-							fontSize: "18px",
-							fontWeight: "bold",
-							color: isActive ? "#28a745" : "#dc3545",
-							transition: "0.3s",
-						}}
-					>
-						{status}
-					</p>
-
-					<button
-						onMouseEnter={() => setHover(true)}
-						onMouseLeave={() => setHover(false)}
-						onClick={() =>
-							setStatus(
-								isActive
-									? "Отключено"
-									: "Активен (подключено к Cloudflare)"
-							)
-						}
-						style={{
-							marginTop: "15px",
-							padding: "12px 25px",
-							fontSize: "16px",
-							borderRadius: "8px",
-							border: "none",
-							cursor: "pointer",
-							background: hover
-								? "linear-gradient(90deg, #2a5298, #1e3c72)"
-								: "linear-gradient(90deg, #1e3c72, #2a5298)",
-							color: "#fff",
-							boxShadow: "0 8px 15px rgba(0,0,0,0.2)",
-							transform: hover ? "scale(1.05)" : "scale(1)",
-							transition: "all 0.2s ease",
-						}}
-					>
-						{isActive ? "Отключить сервер" : "Проверить статус"}
-					</button>
-				</section>
-
-				<footer
+		<div style={page}>
+			{/* HERO */}
+			<section style={hero}>
+				<h1 style={title}>☁ SkyCloud</h1>
+				<p style={subtitle}>
+					Интеллектуальная облачная платформа нового поколения
+				</p>
+				<button
+					onClick={() => setActive(!active)}
 					style={{
-						marginTop: "40px",
-						fontSize: "14px",
-						color: "#888",
+						...button,
+						background: active
+							? "linear-gradient(90deg,#00e676,#00c853)"
+							: "linear-gradient(90deg,#4f46e5,#3b82f6)",
 					}}
 				>
-					© 2026 CloudHub Solutions. Все права защищены.
-				</footer>
-			</div>
+					{active ? "Система активна" : "Запустить платформу"}
+				</button>
+			</section>
+
+			{/* FEATURES */}
+			<section style={grid}>
+				{cards.map((card, i) => (
+					<div key={i} style={cardStyle}>
+						<h3 style={{ marginBottom: 10 }}>{card.title}</h3>
+						<p style={{ opacity: 0.75 }}>{card.desc}</p>
+					</div>
+				))}
+			</section>
+
+			{/* INFO BLOCK */}
+			<section style={infoBlock}>
+				<h2>Что такое облако?</h2>
+				<p style={{ maxWidth: 700, margin: "20px auto", opacity: 0.8 }}>
+					Облачные вычисления позволяют хранить данные, запускать приложения
+					и управлять инфраструктурой через интернет без необходимости
+					покупки собственного оборудования. Это гибко, безопасно и
+					масштабируемо.
+				</p>
+			</section>
+
+			{/* STATUS */}
+			<section style={statusBlock}>
+				<div
+					style={{
+						...dot,
+						backgroundColor: active ? "#00e676" : "#ff5252",
+					}}
+				/>
+				<p>
+					{active
+						? "Сервер подключён и работает стабильно"
+						: "Сервер остановлен"}
+				</p>
+			</section>
+
+			<footer style={footer}>
+				© 2026 SkyCloud Technologies
+			</footer>
 		</div>
 	);
 }
 
-const cardStyle: React.CSSProperties = {
-	padding: "25px",
-	marginBottom: "25px",
-	borderRadius: "12px",
-	backgroundColor: "#f8f9fa",
-	boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+/* ---------- DATA ---------- */
+
+const cards = [
+	{
+		title: "Мгновенная масштабируемость",
+		desc: "Ресурсы автоматически увеличиваются при росте нагрузки.",
+	},
+	{
+		title: "Глобальная инфраструктура",
+		desc: "Дата-центры по всему миру для минимальной задержки.",
+	},
+	{
+		title: "Максимальная безопасность",
+		desc: "Шифрование, защита и мониторинг 24/7.",
+	},
+	{
+		title: "Экономия бюджета",
+		desc: "Платите только за фактическое использование ресурсов.",
+	},
+];
+
+/* ---------- STYLES ---------- */
+
+const page: React.CSSProperties = {
+	minHeight: "100vh",
+	background:
+		"radial-gradient(circle at 10% 20%, #1e1b4b, #0f172a 60%)",
+	color: "white",
+	fontFamily: "Inter, system-ui, sans-serif",
+	padding: "60px 20px",
 };
 
-const listStyle: React.CSSProperties = {
-	listStyle: "none",
-	padding: 0,
-	lineHeight: "1.8",
-	color: "#444",
+const hero: React.CSSProperties = {
+	textAlign: "center",
+	marginBottom: "80px",
+};
+
+const title: React.CSSProperties = {
+	fontSize: "64px",
+	margin: 0,
+	fontWeight: 800,
+	letterSpacing: "1px",
+};
+
+const subtitle: React.CSSProperties = {
+	opacity: 0.7,
+	marginTop: 20,
+	marginBottom: 30,
+	fontSize: 18,
+};
+
+const button: React.CSSProperties = {
+	padding: "14px 34px",
+	borderRadius: 14,
+	border: "none",
+	color: "white",
+	fontSize: 16,
+	cursor: "pointer",
+	transition: "0.3s",
+	boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+};
+
+const grid: React.CSSProperties = {
+	display: "grid",
+	gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+	gap: 25,
+	marginBottom: 80,
+};
+
+const cardStyle: React.CSSProperties = {
+	padding: 30,
+	borderRadius: 20,
+	background: "rgba(255,255,255,0.05)",
+	backdropFilter: "blur(15px)",
+	border: "1px solid rgba(255,255,255,0.1)",
+	boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
+	transition: "0.3s",
+};
+
+const infoBlock: React.CSSProperties = {
+	textAlign: "center",
+	marginBottom: 60,
+};
+
+const statusBlock: React.CSSProperties = {
+	textAlign: "center",
+	padding: 30,
+	borderRadius: 20,
+	background: "rgba(255,255,255,0.05)",
+	backdropFilter: "blur(10px)",
+	border: "1px solid rgba(255,255,255,0.1)",
+	maxWidth: 400,
+	margin: "0 auto",
+};
+
+const dot: React.CSSProperties = {
+	width: 16,
+	height: 16,
+	borderRadius: "50%",
+	margin: "0 auto 15px auto",
+	transition: "0.3s",
+};
+
+const footer: React.CSSProperties = {
+	textAlign: "center",
+	marginTop: 80,
+	opacity: 0.4,
+	fontSize: 14,
 };
 
 export default App;
