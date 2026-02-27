@@ -1,67 +1,61 @@
 import { useState } from "react";
 
 function App() {
-	const [active, setActive] = useState(false);
+	const [liked, setLiked] = useState(false);
 
 	return (
 		<div style={page}>
 			{/* HERO */}
 			<section style={hero}>
-				<h1 style={title}>☁ SkyCloud</h1>
+				<h1 style={title}>🍫 ChocoDelight</h1>
 				<p style={subtitle}>
-					Интеллектуальная облачная платформа нового поколения
+					Искусство настоящего шоколада
 				</p>
+
 				<button
-					onClick={() => setActive(!active)}
+					onClick={() => setLiked(!liked)}
 					style={{
 						...button,
-						background: active
-							? "linear-gradient(90deg,#00e676,#00c853)"
-							: "linear-gradient(90deg,#4f46e5,#3b82f6)",
+						background: liked
+							? "linear-gradient(90deg,#6b3e26,#3e1f12)"
+							: "linear-gradient(90deg,#a0522d,#6b3e26)",
 					}}
 				>
-					{active ? "Система активна" : "Запустить платформу"}
+					{liked ? "❤️ Люблю шоколад!" : "Попробовать вкус"}
 				</button>
 			</section>
 
-			{/* FEATURES */}
+			{/* ABOUT */}
+			<section style={about}>
+				<h2>Что такое настоящий шоколад?</h2>
+				<p style={text}>
+					Настоящий шоколад создаётся из какао-бобов высшего качества.
+					Он тает во рту, раскрывая глубокий аромат и насыщенный вкус.
+					Это не просто сладость — это удовольствие.
+				</p>
+			</section>
+
+			{/* TYPES */}
 			<section style={grid}>
-				{cards.map((card, i) => (
-					<div key={i} style={cardStyle}>
-						<h3 style={{ marginBottom: 10 }}>{card.title}</h3>
-						<p style={{ opacity: 0.75 }}>{card.desc}</p>
+				{types.map((item, i) => (
+					<div key={i} style={card}>
+						<h3>{item.title}</h3>
+						<p style={{ opacity: 0.8 }}>{item.desc}</p>
 					</div>
 				))}
 			</section>
 
-			{/* INFO BLOCK */}
-			<section style={infoBlock}>
-				<h2>Что такое облако?</h2>
-				<p style={{ maxWidth: 700, margin: "20px auto", opacity: 0.8 }}>
-					Облачные вычисления позволяют хранить данные, запускать приложения
-					и управлять инфраструктурой через интернет без необходимости
-					покупки собственного оборудования. Это гибко, безопасно и
-					масштабируемо.
-				</p>
-			</section>
-
 			{/* STATUS */}
-			<section style={statusBlock}>
-				<div
-					style={{
-						...dot,
-						backgroundColor: active ? "#00e676" : "#ff5252",
-					}}
-				/>
+			<section style={footerBlock}>
 				<p>
-					{active
-						? "Сервер подключён и работает стабильно"
-						: "Сервер остановлен"}
+					{liked
+						? "Вы сделали отличный выбор 🍫"
+						: "Шоколад делает жизнь слаще ✨"}
 				</p>
 			</section>
 
 			<footer style={footer}>
-				© 2026 SkyCloud Technologies
+				© 2026 ChocoDelight
 			</footer>
 		</div>
 	);
@@ -69,22 +63,22 @@ function App() {
 
 /* ---------- DATA ---------- */
 
-const cards = [
+const types = [
 	{
-		title: "Мгновенная масштабируемость",
-		desc: "Ресурсы автоматически увеличиваются при росте нагрузки.",
+		title: "Тёмный шоколад",
+		desc: "Насыщенный вкус с высоким содержанием какао.",
 	},
 	{
-		title: "Глобальная инфраструктура",
-		desc: "Дата-центры по всему миру для минимальной задержки.",
+		title: "Молочный шоколад",
+		desc: "Нежная текстура и мягкий сладкий вкус.",
 	},
 	{
-		title: "Максимальная безопасность",
-		desc: "Шифрование, защита и мониторинг 24/7.",
+		title: "Белый шоколад",
+		desc: "Сливочный и сладкий, без какао-порошка.",
 	},
 	{
-		title: "Экономия бюджета",
-		desc: "Платите только за фактическое использование ресурсов.",
+		title: "Ручная работа",
+		desc: "Эксклюзивные рецепты от мастеров-шоколатье.",
 	},
 ];
 
@@ -93,9 +87,9 @@ const cards = [
 const page: React.CSSProperties = {
 	minHeight: "100vh",
 	background:
-		"radial-gradient(circle at 10% 20%, #1e1b4b, #0f172a 60%)",
-	color: "white",
-	fontFamily: "Inter, system-ui, sans-serif",
+		"radial-gradient(circle at 20% 20%, #4b2e2e, #2b1a1a 60%)",
+	color: "#fff8f0",
+	fontFamily: "Georgia, serif",
 	padding: "60px 20px",
 };
 
@@ -107,67 +101,62 @@ const hero: React.CSSProperties = {
 const title: React.CSSProperties = {
 	fontSize: "64px",
 	margin: 0,
-	fontWeight: 800,
-	letterSpacing: "1px",
+	fontWeight: 700,
 };
 
 const subtitle: React.CSSProperties = {
-	opacity: 0.7,
-	marginTop: 20,
+	marginTop: 15,
 	marginBottom: 30,
 	fontSize: 18,
+	opacity: 0.8,
 };
 
 const button: React.CSSProperties = {
-	padding: "14px 34px",
-	borderRadius: 14,
+	padding: "14px 36px",
+	borderRadius: 20,
 	border: "none",
 	color: "white",
 	fontSize: 16,
 	cursor: "pointer",
+	boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
 	transition: "0.3s",
-	boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+};
+
+const about: React.CSSProperties = {
+	textAlign: "center",
+	maxWidth: 700,
+	margin: "0 auto 60px auto",
+};
+
+const text: React.CSSProperties = {
+	marginTop: 20,
+	lineHeight: 1.7,
+	opacity: 0.9,
 };
 
 const grid: React.CSSProperties = {
 	display: "grid",
 	gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
 	gap: 25,
-	marginBottom: 80,
-};
-
-const cardStyle: React.CSSProperties = {
-	padding: 30,
-	borderRadius: 20,
-	background: "rgba(255,255,255,0.05)",
-	backdropFilter: "blur(15px)",
-	border: "1px solid rgba(255,255,255,0.1)",
-	boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
-	transition: "0.3s",
-};
-
-const infoBlock: React.CSSProperties = {
-	textAlign: "center",
 	marginBottom: 60,
 };
 
-const statusBlock: React.CSSProperties = {
-	textAlign: "center",
+const card: React.CSSProperties = {
 	padding: 30,
 	borderRadius: 20,
 	background: "rgba(255,255,255,0.05)",
 	backdropFilter: "blur(10px)",
 	border: "1px solid rgba(255,255,255,0.1)",
-	maxWidth: 400,
-	margin: "0 auto",
+	boxShadow: "0 15px 35px rgba(0,0,0,0.3)",
 };
 
-const dot: React.CSSProperties = {
-	width: 16,
-	height: 16,
-	borderRadius: "50%",
-	margin: "0 auto 15px auto",
-	transition: "0.3s",
+const footerBlock: React.CSSProperties = {
+	textAlign: "center",
+	padding: 30,
+	borderRadius: 20,
+	background: "rgba(255,255,255,0.05)",
+	maxWidth: 400,
+	margin: "0 auto",
 };
 
 const footer: React.CSSProperties = {
