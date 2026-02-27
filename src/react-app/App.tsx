@@ -9,7 +9,7 @@ function App() {
 			<section style={hero}>
 				<h1 style={title}>🍫 ChocoDelight</h1>
 				<p style={subtitle}>
-					Искусство настоящего шоколада
+					Искусство настоящего шоколада премиального качества
 				</p>
 
 				<button
@@ -17,45 +17,52 @@ function App() {
 					style={{
 						...button,
 						background: liked
-							? "linear-gradient(90deg,#6b3e26,#3e1f12)"
-							: "linear-gradient(90deg,#a0522d,#6b3e26)",
+							? "linear-gradient(90deg,#5a2d1d,#2e140c)"
+							: "linear-gradient(90deg,#8b4513,#5a2d1d)",
 					}}
 				>
-					{liked ? "❤️ Люблю шоколад!" : "Попробовать вкус"}
+					{liked ? "❤️ Вы выбрали шоколад!" : "Попробовать вкус"}
 				</button>
 			</section>
 
 			{/* ABOUT */}
-			<section style={about}>
-				<h2>Что такое настоящий шоколад?</h2>
+			<section style={aboutSection}>
+				<h2 style={sectionTitle}>О нашем шоколаде</h2>
 				<p style={text}>
-					Настоящий шоколад создаётся из какао-бобов высшего качества.
-					Он тает во рту, раскрывая глубокий аромат и насыщенный вкус.
-					Это не просто сладость — это удовольствие.
+					Мы создаём шоколад из лучших какао-бобов, тщательно отобранных
+					на плантациях Южной Америки. Нежная текстура, глубокий аромат
+					и идеальный баланс сладости делают каждый кусочек настоящим
+					наслаждением.
 				</p>
 			</section>
 
 			{/* TYPES */}
-			<section style={grid}>
-				{types.map((item, i) => (
+			<section style={gridSection}>
+				{products.map((item, i) => (
 					<div key={i} style={card}>
 						<h3>{item.title}</h3>
-						<p style={{ opacity: 0.8 }}>{item.desc}</p>
+						<p style={{ opacity: 0.85 }}>{item.desc}</p>
 					</div>
 				))}
 			</section>
 
 			{/* STATUS */}
-			<section style={footerBlock}>
-				<p>
+			<section style={statusSection}>
+				<div
+					style={{
+						...statusDot,
+						backgroundColor: liked ? "#00e676" : "#ff5252",
+					}}
+				/>
+				<p style={{ fontSize: 18 }}>
 					{liked
-						? "Вы сделали отличный выбор 🍫"
+						? "Спасибо за любовь к шоколаду 🍫"
 						: "Шоколад делает жизнь слаще ✨"}
 				</p>
 			</section>
 
 			<footer style={footer}>
-				© 2026 ChocoDelight
+				© 2026 ChocoDelight Premium Chocolate
 			</footer>
 		</div>
 	);
@@ -63,22 +70,22 @@ function App() {
 
 /* ---------- DATA ---------- */
 
-const types = [
+const products = [
 	{
-		title: "Тёмный шоколад",
-		desc: "Насыщенный вкус с высоким содержанием какао.",
+		title: "Тёмный 85%",
+		desc: "Максимально насыщенный вкус для настоящих ценителей.",
 	},
 	{
-		title: "Молочный шоколад",
-		desc: "Нежная текстура и мягкий сладкий вкус.",
+		title: "Молочный классический",
+		desc: "Нежный и сливочный вкус с карамельными нотами.",
 	},
 	{
 		title: "Белый шоколад",
-		desc: "Сливочный и сладкий, без какао-порошка.",
+		desc: "Сладкий, кремовый, с ароматом ванили.",
 	},
 	{
-		title: "Ручная работа",
-		desc: "Эксклюзивные рецепты от мастеров-шоколатье.",
+		title: "Шоколад с орехами",
+		desc: "Идеальное сочетание хрустящих орехов и мягкого шоколада.",
 	},
 ];
 
@@ -86,83 +93,93 @@ const types = [
 
 const page: React.CSSProperties = {
 	minHeight: "100vh",
+	width: "100%",
 	background:
-		"radial-gradient(circle at 20% 20%, #4b2e2e, #2b1a1a 60%)",
+		"radial-gradient(circle at 10% 20%, #4b2e2e, #2b1a1a 70%)",
 	color: "#fff8f0",
 	fontFamily: "Georgia, serif",
-	padding: "60px 20px",
 };
 
 const hero: React.CSSProperties = {
 	textAlign: "center",
-	marginBottom: "80px",
+	padding: "120px 80px 80px 80px",
 };
 
 const title: React.CSSProperties = {
-	fontSize: "64px",
+	fontSize: "72px",
 	margin: 0,
 	fontWeight: 700,
 };
 
 const subtitle: React.CSSProperties = {
-	marginTop: 15,
-	marginBottom: 30,
-	fontSize: 18,
-	opacity: 0.8,
+	marginTop: 20,
+	marginBottom: 40,
+	fontSize: 20,
+	opacity: 0.85,
 };
 
 const button: React.CSSProperties = {
-	padding: "14px 36px",
-	borderRadius: 20,
+	padding: "16px 40px",
+	borderRadius: 30,
 	border: "none",
 	color: "white",
-	fontSize: 16,
+	fontSize: 18,
 	cursor: "pointer",
-	boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+	boxShadow: "0 15px 40px rgba(0,0,0,0.4)",
 	transition: "0.3s",
 };
 
-const about: React.CSSProperties = {
+const aboutSection: React.CSSProperties = {
+	padding: "80px 120px",
 	textAlign: "center",
-	maxWidth: 700,
-	margin: "0 auto 60px auto",
+};
+
+const sectionTitle: React.CSSProperties = {
+	fontSize: 36,
+	marginBottom: 30,
 };
 
 const text: React.CSSProperties = {
-	marginTop: 20,
-	lineHeight: 1.7,
+	maxWidth: 1000,
+	margin: "0 auto",
+	lineHeight: 1.8,
+	fontSize: 18,
 	opacity: 0.9,
 };
 
-const grid: React.CSSProperties = {
+const gridSection: React.CSSProperties = {
 	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-	gap: 25,
-	marginBottom: 60,
+	gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+	gap: 40,
+	padding: "80px 120px",
 };
 
 const card: React.CSSProperties = {
-	padding: 30,
-	borderRadius: 20,
-	background: "rgba(255,255,255,0.05)",
-	backdropFilter: "blur(10px)",
-	border: "1px solid rgba(255,255,255,0.1)",
-	boxShadow: "0 15px 35px rgba(0,0,0,0.3)",
+	padding: 40,
+	borderRadius: 25,
+	background: "rgba(255,255,255,0.06)",
+	backdropFilter: "blur(12px)",
+	border: "1px solid rgba(255,255,255,0.15)",
+	boxShadow: "0 20px 50px rgba(0,0,0,0.4)",
+	transition: "0.3s",
 };
 
-const footerBlock: React.CSSProperties = {
+const statusSection: React.CSSProperties = {
 	textAlign: "center",
-	padding: 30,
-	borderRadius: 20,
-	background: "rgba(255,255,255,0.05)",
-	maxWidth: 400,
-	margin: "0 auto",
+	padding: "60px 20px",
+};
+
+const statusDot: React.CSSProperties = {
+	width: 18,
+	height: 18,
+	borderRadius: "50%",
+	margin: "0 auto 20px auto",
 };
 
 const footer: React.CSSProperties = {
 	textAlign: "center",
-	marginTop: 80,
-	opacity: 0.4,
+	padding: "40px",
+	opacity: 0.5,
 	fontSize: 14,
 };
 
